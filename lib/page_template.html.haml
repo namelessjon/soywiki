@@ -26,6 +26,6 @@
     .main
       %h2= title
       - if markdown
-        != body.to_html
+        != body.html
       - else
         %pre= body

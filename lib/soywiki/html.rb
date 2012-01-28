@@ -1,5 +1,5 @@
 require 'haml'
-require 'rdiscount'
+require 'soywiki/html/renderer'
 module Soywiki
   module Html
 
@@ -38,10 +38,12 @@ module Soywiki
       body = if text.empty?
                ''
              elsif @markdown
-               RDiscount.new(text.join("\n").strip)
+               render_markdown(text.join("\n").strip)
              else
                process(text.join("\n").strip)
              end
+
+      title = body.metadata['title'] ? body.metadata['title'] : title
 
       Haml::Engine.new(PAGE_TEMPLATE).render(nil, :body => body,
                                              :title => title,
@@ -49,6 +51,15 @@ module Soywiki
                                              :namespaces => namespaces,
                                              :pages => pages,
                                              :markdown => @markdown)
+    end
+
+    def self.render_markdown(text)
+      renderer = Renderer.new()
+      markdown = Redcarpet::Markdown.new(renderer, {fenced_code_blocks:true,autolink:true,strikethrough:true,superscript:true})
+
+      output = markdown.render(text)
+
+      output = Renderer::Data.new(renderer.metadata, output)
     end
 
 

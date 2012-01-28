@@ -1,10 +1,14 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    RedCloth (4.2.9)
     haml (3.0.25)
+    redcarpet (2.1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  RedCloth
   haml
+  redcarpet

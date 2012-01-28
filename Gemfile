@@ -1,3 +1,4 @@
 source :rubygems
 gem "haml"
-gem "rdiscount"
+gem "redcarpet"
+gem "RedCloth", :require => 'redcloth'
