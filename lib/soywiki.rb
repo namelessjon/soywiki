@@ -1,4 +1,4 @@
-require 'string_ext'
+require 'soywiki/string_ext'
 
 module Soywiki
   VERSION = '0.8.5'
